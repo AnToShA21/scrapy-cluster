@@ -34,7 +34,7 @@ SCHEDULER_QUEUE_REFRESH = 10
 
 # throttled queue defaults per domain, x hits in a y second window
 QUEUE_HITS = 10
-QUEUE_WINDOW = 60
+QUEUE_WINDOW = 1
 
 # we want the queue to produce a consistent pop flow
 QUEUE_MODERATED = True
@@ -161,7 +161,7 @@ HTTPERROR_ALLOW_ALL = True
 
 RETRY_TIMES = 3
 
-DOWNLOAD_TIMEOUT = 10
+DOWNLOAD_TIMEOUT = 0
 
 # Avoid in-memory DNS cache. See Advanced topics of docs for info
 DNSCACHE_ENABLED = True
