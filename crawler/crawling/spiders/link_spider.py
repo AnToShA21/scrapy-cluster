@@ -16,6 +16,8 @@ import time
 import redis
 import sys
 from redis.exceptions import ConnectionError
+from scrapy.utils.project import get_project_settings
+
 
 
 class LinkSpider(RedisSpider):
