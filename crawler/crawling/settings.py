@@ -7,7 +7,7 @@ from __future__ import absolute_import
 
 # Specify the host and port to use when connecting to Redis.
 REDIS_HOST = '10.142.0.2'
-REDIS_PORT = '6379'
+REDIS_PORT = '32770'
 REDIS_DB = 0
 
 # Kafka server information
@@ -130,7 +130,7 @@ SCHEDULER = "crawling.distributed_scheduler.DistributedScheduler"
 
 # Store scraped item in redis for post-processing.
 ITEM_PIPELINES = {
-    'crawling.pipelines.KafkaPipeline': 100,
+    # 'crawling.pipelines.KafkaPipeline': 100,
     'crawling.pipelines.LoggingBeforePipeline': 1,
 }
 
