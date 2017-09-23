@@ -1,8 +1,9 @@
 from __future__ import absolute_import
 from .kafka_base_monitor import KafkaBaseMonitor
+from .base_monitor import  BaseMonitor
 
 
-class StatsMonitor(KafkaBaseMonitor):
+class StatsMonitor(BaseMonitor):
 
     regex = "statsrequest:*:*"
 
@@ -10,7 +11,7 @@ class StatsMonitor(KafkaBaseMonitor):
         '''
         Setup kafka
         '''
-        KafkaBaseMonitor.setup(self, settings)
+        BaseMonitor.setup(self, settings)
 
     def handle(self, key, value):
         '''
@@ -72,7 +73,7 @@ class StatsMonitor(KafkaBaseMonitor):
         '''
         self.logger.debug("Gathering all stats")
         the_dict = {}
-        the_dict['kafka-monitor'] = self.get_kafka_monitor_stats()
+        # the_dict['kafka-monitor'] = self.get_kafka_monitor_stats()
         the_dict['redis-monitor'] = self.get_redis_monitor_stats()
         the_dict['crawler'] = self.get_crawler_stats()
         the_dict['rest'] = self.get_rest_stats()
@@ -85,8 +86,8 @@ class StatsMonitor(KafkaBaseMonitor):
 
         @return: A dict of stats
         '''
-        self.logger.debug("Gathering kafka-monitor stats")
-        return self._get_plugin_stats('kafka-monitor')
+        # self.logger.debug("Gathering kafka-monitor stats")
+        # return self._get_plugin_stats('kafka-monitor')
 
     def get_redis_monitor_stats(self):
         '''
