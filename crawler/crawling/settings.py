@@ -6,12 +6,12 @@ from __future__ import absolute_import
 # ~~~~~~~~~~~~~~~~~~~~~~~
 
 # Specify the host and port to use when connecting to Redis.
-REDIS_HOST = 'localhost'
+REDIS_HOST = '10.142.0.2'
 REDIS_PORT = '6379'
 REDIS_DB = 0
 
 # Kafka server information
-KAFKA_HOSTS = ['localhost:9092']
+KAFKA_HOSTS = ['10.142.0.2:9092']
 KAFKA_TOPIC_PREFIX = 'demo'
 KAFKA_APPID_TOPICS = False
 # base64 encode the html body to avoid json dump errors due to malformed text
@@ -21,7 +21,7 @@ KAFKA_PRODUCER_BUFFER_BYTES = 4 * 1024 * 1024  # 4MB before blocking
 
 ZOOKEEPER_ASSIGN_PATH = '/scrapy-cluster/crawler/'
 ZOOKEEPER_ID = 'all'
-ZOOKEEPER_HOSTS = 'localhost:2181'
+ZOOKEEPER_HOSTS = '10.142.0.2:2181'
 
 PUBLIC_IP_URL = 'http://ip.42.pl/raw'
 IP_ADDR_REGEX = '(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})'
