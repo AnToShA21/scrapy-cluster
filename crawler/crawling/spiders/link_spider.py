@@ -20,7 +20,7 @@ class LinkSpider(RedisSpider):
         super(LinkSpider, self).__init__(*args, **kwargs)
 
     def parse(self, response):
-        self._logger.debug("crawled url {}".format(response.request.url))
+        self._logger.info("crawled url {}".format(response.request.url))
         cur_depth = 0
         if 'curdepth' in response.meta:
             cur_depth = response.meta['curdepth']
@@ -44,7 +44,7 @@ class LinkSpider(RedisSpider):
 
         # determine whether to continue spidering
         if cur_depth >= response.meta['maxdepth']:
-            self._logger.debug("Not spidering links in '{}' because" \
+            self._logger.info("Not spidering links in '{}' because" \
                 " cur_depth={} >= maxdepth={}".format(
                                                       response.url,
                                                       cur_depth,

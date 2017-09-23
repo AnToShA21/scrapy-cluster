@@ -154,7 +154,7 @@ DOWNLOADER_MIDDLEWARES = {
 }
 
 # Disable the built in logging in production
-LOG_ENABLED = True
+LOG_ENABLED = False
 
 # Allow all return codes
 HTTPERROR_ALLOW_ALL = True
