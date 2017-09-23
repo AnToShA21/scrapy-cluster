@@ -14,13 +14,13 @@ services:
       - redis
       - zookeeper
     restart: always
-  crawler:
-    image: istresearch/scrapy-cluster:crawler-1.2
-    depends_on:
-      - kafka
-      - redis
-      - zookeeper
-    restart: always
+#  crawler:
+#    image: istresearch/scrapy-cluster:crawler-1.2
+#    depends_on:
+#      - kafka
+#      - redis
+#      - zookeeper
+#    restart: always
   rest:
     image: istresearch/scrapy-cluster:rest-1.2
     depends_on:
