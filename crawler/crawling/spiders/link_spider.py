@@ -8,6 +8,15 @@ from scrapy.conf import settings
 from crawling.items import RawResponseItem
 from crawling.spiders.redis_spider import RedisSpider
 
+from scutils.stats_collector import StatsCollector
+
+from scutils.log_factory import LogFactory
+import socket
+import time
+import redis
+import sys
+from redis.exceptions import ConnectionError
+
 
 class LinkSpider(RedisSpider):
     '''
@@ -18,6 +27,24 @@ class LinkSpider(RedisSpider):
 
     def __init__(self, *args, **kwargs):
         super(LinkSpider, self).__init__(*args, **kwargs)
+
+        settings = get_project_settings()
+        self.redis_conn = redis.Redis(host=settings.get('REDIS_HOST'),
+                                      port=settings.get('REDIS_PORT'),
+                                      db=settings.get('REDIS_DB'))
+
+        try:
+            self.redis_conn.info()
+            self.logger.debug("Connected to Redis in Spider")
+        except ConnectionError:
+            self.logger.error("Failed to connect to Redis in Spider")
+            # plugin is essential to functionality
+            sys.exit(1)
+
+        self.temp_key = 'domain:stats:pages'
+
+        self.counter = {}
+
 
     def parse(self, response):
         self._logger.info("crawled url {}".format(response.request.url))
@@ -41,6 +68,13 @@ class LinkSpider(RedisSpider):
         item["request_headers"] = response.request.headers
         item["body"] = response.body
         item["links"] = []
+
+        if item['crawlid']  not in self.counter:
+            key='{k:i}'.format(k=self.temp_key, i=item['crawlid'] ),
+            self.counter[item['crawlid']] = StatsCollector.get_counter(edis_conn=self.redis_conn,
+                            key=key,)
+
+        self.counter[item['crawlid']].increment()
 
         # determine whether to continue spidering
         if cur_depth >= response.meta['maxdepth']:

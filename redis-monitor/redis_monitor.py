@@ -450,6 +450,18 @@ class RedisMonitor(object):
         else:
             self.logger.info('Crawler Stats Dump', extra=extras)
 
+        keys = self.redis_conn.keys('domain:stats:pages:*')
+        for key in keys:
+            # we only care about the spider
+            elements = key.split(":")
+            crawlId = elements[3]
+
+
+            value = self.redis_conn.zcard(key)
+
+            self.logger.info('Crawler Pages:\n{c} = {v}'.format( c = crawlId, v=value ))
+
+
     def _dump_queue_stats(self):
         '''
         Dumps basic info about the queue lengths for the spider types
