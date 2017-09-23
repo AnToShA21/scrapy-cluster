@@ -20,11 +20,11 @@ ZOOKEEPER_HOSTS = 'localhost:2181'
 
 PLUGIN_DIR = "plugins/"
 PLUGINS = {
-    'plugins.info_monitor.InfoMonitor': 100,
-    'plugins.stop_monitor.StopMonitor': 200,
-    'plugins.expire_monitor.ExpireMonitor': 300,
+    # 'plugins.info_monitor.InfoMonitor': 100,
+    # 'plugins.stop_monitor.StopMonitor': 200,
+    # 'plugins.expire_monitor.ExpireMonitor': 300,
     'plugins.stats_monitor.StatsMonitor': 400,
-    'plugins.zookeeper_monitor.ZookeeperMonitor': 500,
+    # 'plugins.zookeeper_monitor.ZookeeperMonitor': 500,
 }
 
 # logging setup
