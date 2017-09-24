@@ -72,11 +72,15 @@ class LinkSpider(RedisSpider):
         item["links"] = []
 
         if item['crawlid']  not in self.counter:
+            self._logger.info("no counter for {crawlid} ".format(crawlid = item['crawlid']))
+
             key='{k:i}'.format(k=self.temp_key, i=item['crawlid'] ),
             self.counter[item['crawlid']] = StatsCollector.get_counter(edis_conn=self.redis_conn,
                             key=key,)
 
+        self._logger.info("counter {crawlid} preincrement".format(crawlid = item['crawlid']))
         self.counter[item['crawlid']].increment()
+        self._logger.info("counter {crawlid} postincrement".format(crawlid=item['crawlid']))
 
         # determine whether to continue spidering
         if cur_depth >= response.meta['maxdepth']:
