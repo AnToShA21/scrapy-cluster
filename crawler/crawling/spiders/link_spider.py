@@ -37,7 +37,7 @@ class LinkSpider(RedisSpider):
 
         try:
             self.redis_conn.info()
-            self.logger.debug("Connected to Redis in Spider")
+            self.logger.info("Connected to Redis in Spider")
         except ConnectionError:
             self.logger.error("Failed to connect to Redis in Spider")
             # plugin is essential to functionality
@@ -75,7 +75,7 @@ class LinkSpider(RedisSpider):
 
             key='{k}:{i}'.format(k=self.temp_key, i=item['crawlid'] )
             self._logger.info("no counter for {crawlid} key {key} ".format(crawlid=item['crawlid'], key=key))
-            self.counter[item['crawlid']] = StatsCollector.get_counter(edis_conn=self.redis_conn,
+            self.counter[item['crawlid']] = StatsCollector.get_counter(redis_conn=self.redis_conn,
                             key=key, roll=False)
 
         self._logger.info("counter {crawlid} preincrement".format(crawlid = item['crawlid']))
