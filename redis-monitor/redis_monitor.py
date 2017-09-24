@@ -457,7 +457,7 @@ class RedisMonitor(object):
             crawlId = elements[3]
 
 
-            value = self.redis_conn.zcard(key)
+            value = self.redis_conn.get(key)
 
             self.logger.info('Crawler Pages:\n{c} = {v}'.format( c = crawlId, v=value ))
 
