@@ -73,7 +73,7 @@ class LinkSpider(RedisSpider):
 
         if item['crawlid']  not in self.counter:
 
-            key='{k}:{i}'.format(k=self.temp_key, i=item['crawlid'] ),
+            key='{k}:{i}'.format(k=self.temp_key, i=item['crawlid'] )
             self._logger.info("no counter for {crawlid} key {key} ".format(crawlid=item['crawlid'], key=key))
             self.counter[item['crawlid']] = StatsCollector.get_counter(edis_conn=self.redis_conn,
                             key=key, roll=False)
